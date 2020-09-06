@@ -1,4 +1,4 @@
-class SipAT4198 < Formula
+class SipAT419812 < Formula
   desc "Tool to create Python bindings for C and C++ libraries"
   homepage "https://www.riverbankcomputing.com/software/sip/intro"
   url "https://dl.bintray.com/homebrew/mirror/sip-4.19.8.tar.gz"
