@@ -5,11 +5,11 @@ class OpencvAT3Python2 < Formula
   sha256 "0c57d9dd6d30cbffe68a09b03f4bebe773ee44dc8ff5cd6eaeb7f4d5ef3b428e"
   revision 3
 
-  bottle do
-    sha256 "834e7c5a597ad6aae95af9eb45eee848990f242d43deb8346896abb6e902a40e" => :mojave
-    sha256 "fbf8503780bbb221340f5ee8f0974b9fe63099fdfcc63b45eba545775837e9e8" => :high_sierra
-    sha256 "d19fed022810caf5a2abfb6b7dd8f4a515d0f2d9db721344a616efb8a7a7a688" => :sierra
-  end
+  # bottle do
+  #   sha256 "834e7c5a597ad6aae95af9eb45eee848990f242d43deb8346896abb6e902a40e" => :mojave
+  #   sha256 "fbf8503780bbb221340f5ee8f0974b9fe63099fdfcc63b45eba545775837e9e8" => :high_sierra
+  #   sha256 "d19fed022810caf5a2abfb6b7dd8f4a515d0f2d9db721344a616efb8a7a7a688" => :sierra
+  # end
 
   keg_only :versioned_formula
 

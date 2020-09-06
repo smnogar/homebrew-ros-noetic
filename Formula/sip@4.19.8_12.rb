@@ -7,12 +7,12 @@ class SipAT419812 < Formula
   revision 12
   head "https://www.riverbankcomputing.com/hg/sip", :using => :hg
 
-  bottle do
-    cellar :any_skip_relocation
-    sha256 "6e71708515bb6b3b7956ac076058dbf4d2eeae470dace9563dbe9f313479a9b7" => :mojave
-    sha256 "c3b58c31be4c2014bb082731f25148ec65dce923d2499f72dc8eddcc95afa661" => :high_sierra
-    sha256 "d223031f11bfedd3247236109ce5bc0b7ff9a7e0672d44b4a4d1a129393d505c" => :sierra
-  end
+  # bottle do
+  #   cellar :any_skip_relocation
+  #   sha256 "6e71708515bb6b3b7956ac076058dbf4d2eeae470dace9563dbe9f313479a9b7" => :mojave
+  #   sha256 "c3b58c31be4c2014bb082731f25148ec65dce923d2499f72dc8eddcc95afa661" => :high_sierra
+  #   sha256 "d223031f11bfedd3247236109ce5bc0b7ff9a7e0672d44b4a4d1a129393d505c" => :sierra
+  # end
 
   depends_on "python"
   depends_on "python@2"
