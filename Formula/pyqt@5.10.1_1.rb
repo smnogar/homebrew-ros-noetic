@@ -1,4 +1,4 @@
-class Pyqt < Formula
+class PyqtAT5101 < Formula
   desc "Python bindings for v5 of Qt"
   homepage "https://www.riverbankcomputing.com/software/pyqt/download5"
   url "https://dl.bintray.com/homebrew/mirror/pyqt-5.10.1.tar.gz"
