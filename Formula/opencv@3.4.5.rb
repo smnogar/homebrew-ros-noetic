@@ -1,4 +1,4 @@
-class OpencvAT3Python2 < Formula
+class OpencvAT345 < Formula
   desc "Open source computer vision library"
   homepage "https://opencv.org/"
   url "https://github.com/opencv/opencv/archive/3.4.5.tar.gz"
