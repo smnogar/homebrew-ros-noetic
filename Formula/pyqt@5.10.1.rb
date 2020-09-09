@@ -8,7 +8,7 @@ class PyqtAT5101 < Formula
 
   depends_on "python@2"
   depends_on "python"
-  depends_on "qt"
+  depends_on "qt@5.10.1"
   depends_on "sip@4.19.8"
 
   # Patch from openSUSE for compatibility with Qt 5.11.0
