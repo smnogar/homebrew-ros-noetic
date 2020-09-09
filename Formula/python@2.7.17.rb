@@ -1,10 +1,21 @@
-class PythonAT2 < Formula
+class PythonAT2717 < Formula
   desc "Interpreted, interactive, object-oriented programming language"
   homepage "https://www.python.org/"
   url "https://www.python.org/ftp/python/2.7.17/Python-2.7.17.tar.xz"
   sha256 "4d43f033cdbd0aa7b7023c81b0e986fd11e653b5248dac9144d508f11812ba41"
   revision 1
   head "https://github.com/python/cpython.git", :branch => "2.7"
+
+  # setuptools remembers the build flags python is built with and uses them to
+  # build packages later. Xcode-only systems need different flags.
+  pour_bottle? do
+    reason <<~EOS
+      The bottle needs the Apple Command Line Tools to be installed.
+        You can install them, if desired, with:
+          xcode-select --install
+    EOS
+    satisfy { MacOS::CLT.installed? }
+  end
 
   depends_on "pkg-config" => :build
   depends_on "gdbm"

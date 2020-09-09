@@ -1,4 +1,4 @@
-class BoostAT171 < Formula
+class BoostAT1710 < Formula
   desc "Collection of portable C++ source libraries"
   homepage "https://www.boost.org/"
   url "https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.bz2"
@@ -6,13 +6,6 @@ class BoostAT171 < Formula
   head "https://github.com/boostorg/boost.git"
 
   depends_on "icu4c"
-
-    # Fix build on Xcode 11.4
-  patch do
-    url "https://github.com/boostorg/build/commit/b3a59d265929a213f02a451bb63cea75d668a4d9.patch?full_index=1"
-    sha256 "04a4df38ed9c5a4346fbb50ae4ccc948a1440328beac03cb3586c8e2e241be08"
-    directory "tools/build"
-  end
 
   def install
     # Force boost to compile with the desired compiler
