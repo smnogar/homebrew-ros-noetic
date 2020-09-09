@@ -6,7 +6,7 @@ class BoostPythonAT1710 < Formula
   revision 1
   head "https://github.com/boostorg/boost.git"
 
-  depends_on "boost"
+  depends_on "boost@1.71.0"
 
   def install
     # "layout" should be synchronized with boost
