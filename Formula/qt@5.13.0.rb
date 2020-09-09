@@ -1,37 +1,19 @@
 # Patches for Qt must be at the very least submitted to Qt's Gerrit codereview
 # rather than their bug-report Jira. The latter is rarely reviewed by Qt.
-class QtAT5101 < Formula
+class QtAT5130 < Formula
   desc "Cross-platform application and UI framework"
   homepage "https://www.qt.io/"
-  url "https://dl.bintray.com/homebrew/mirror/qt-5.10.1.tar.xz"
-  mirror "https://download.qt.io/official_releases/qt/5.10/5.10.1/single/qt-everywhere-src-5.10.1.tar.xz"
-  mirror "https://www.mirrorservice.org/sites/download.qt-project.org/official_releases/qt/5.10/5.10.1/single/qt-everywhere-src-5.10.1.tar.xz"
-  sha256 "05ffba7b811b854ed558abf2be2ddbd3bb6ddd0b60ea4b5da75d277ac15e740a"
-  head "https://code.qt.io/qt/qt5.git", :branch => "5.10", :shallow => false
+  url "https://download.qt.io/official_releases/qt/5.13/5.13.0/single/qt-everywhere-src-5.13.0.tar.xz"
+  mirror "https://qt.mirror.constant.com/archive/qt/5.13/5.13.0/single/qt-everywhere-src-5.13.0.tar.xz"
+  mirror "https://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-src-5.13.0.tar.xz"
+  sha256 "2cba31e410e169bd5cdae159f839640e672532a4687ea0f265f686421e0e86d6"
+
+  head "https://code.qt.io/qt/qt5.git", :branch => "dev", :shallow => false
 
   keg_only "Qt 5 has CMake issues when linked"
 
-  option "with-docs", "Build documentation"
-  option "with-examples", "Build examples"
-  option "without-proprietary-codecs", "Don't build with proprietary codecs (e.g. mp3)"
-
   depends_on "pkg-config" => :build
   depends_on :xcode => :build
-  depends_on "mysql" => :optional
-  depends_on "postgresql" => :optional
-
-  # Restore `.pc` files for framework-based build of Qt 5 on OS X. This
-  # partially reverts <https://codereview.qt-project.org/#/c/140954/> merged
-  # between the 5.5.1 and 5.6.0 releases. (Remove this as soon as feasible!)
-  #
-  # Core formulae known to fail without this patch (as of 2016-10-15):
-  #   * gnuplot  (with `--with-qt` option)
-  #   * mkvtoolnix (with `--with-qt` option, silent build failure)
-  #   * poppler    (with `--with-qt` option)
-  patch do
-    url "https://raw.githubusercontent.com/Homebrew/formula-patches/e8fe6567/qt5/restore-pc-files.patch"
-    sha256 "48ff18be2f4050de7288bddbae7f47e949512ac4bcd126c2f504be2ac701158b"
-  end
 
   def install
     args = %W[
@@ -44,40 +26,18 @@ class QtAT5101 < Formula
       -qt-libjpeg
       -qt-freetype
       -qt-pcre
+      -nomake examples
       -nomake tests
       -no-rpath
       -pkg-config
       -dbus-runtime
+      -proprietary-codecs
     ]
-
-    args << "-nomake" << "examples" if build.without? "examples"
-
-    if build.with? "mysql"
-      args << "-plugin-sql-mysql"
-      (buildpath/"brew_shim/mysql_config").write <<~EOS
-        #!/bin/sh
-        if [ x"$1" = x"--libs" ]; then
-          mysql_config --libs | sed "s/-lssl -lcrypto//"
-        else
-          exec mysql_config "$@"
-        fi
-      EOS
-      chmod 0755, "brew_shim/mysql_config"
-      args << "-mysql_config" << buildpath/"brew_shim/mysql_config"
-    end
-
-    args << "-plugin-sql-psql" if build.with? "postgresql"
-    args << "-proprietary-codecs" if build.with? "proprietary-codecs"
 
     system "./configure", *args
     system "make"
     ENV.deparallelize
     system "make", "install"
-
-    if build.with? "docs"
-      system "make", "docs"
-      system "make", "install_docs"
-    end
 
     # Some config scripts will only find Qt in a "Frameworks" folder
     frameworks.install_symlink Dir["#{lib}/*.framework"]
@@ -98,9 +58,9 @@ class QtAT5101 < Formula
   end
 
   def caveats; <<~EOS
-    We agreed to the Qt opensource license for you.
+    We agreed to the Qt open source license for you.
     If this is unacceptable you should uninstall.
-    EOS
+  EOS
   end
 
   test do
