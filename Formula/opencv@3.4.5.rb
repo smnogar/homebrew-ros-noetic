@@ -23,7 +23,7 @@ class OpencvAT345 < Formula
   depends_on "numpy"
   depends_on "openexr"
   depends_on "python"
-  depends_on "python@2.7.17"
+  depends_on "python@2"
   depends_on "tbb"
 
   resource "contrib" do

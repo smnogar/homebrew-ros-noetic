@@ -7,7 +7,7 @@ class SipAT4198 < Formula
   revision 14
   head "https://www.riverbankcomputing.com/hg/sip", :using => :hg
 
-  depends_on "python@2.7.17"
+  depends_on "python@2"
   depends_on "python"
 
   def install

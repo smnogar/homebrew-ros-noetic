@@ -6,7 +6,7 @@ class PyqtAT5101 < Formula
   sha256 "9932e971e825ece4ea08f84ad95017837fa8f3f29c6b0496985fa1093661e9ef"
   revision 2
 
-  depends_on "python@2.7.17"
+  depends_on "python@2"
   depends_on "python"
   depends_on "qt"
   depends_on "sip@4.19.8"
