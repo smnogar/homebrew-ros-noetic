@@ -13,6 +13,8 @@ class BoostAT173 < Formula
     sha256 "25735534a9b0e980d47f55bbb14163327cfc8e919c057dcf93812c5742d34a54" => :big_sur
   end
 
+  keg_only :versioned_formula
+
   depends_on "icu4c"
 
   uses_from_macos "bzip2"
