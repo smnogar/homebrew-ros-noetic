@@ -5,6 +5,12 @@ class BoostAT1710 < Formula
   sha256 "d73a8da01e8bf8c7eda40b4c84915071a8c8a0df4a6734537ddde4a8580524ee"
   head "https://github.com/boostorg/boost.git"
 
+  bottle do
+    root_url "https://dl.bintray.com/snogar/bottles-ros-noetic"
+    cellar :any
+    sha256 "34702888562ef3341822d466752fc15b75f55c4be1050f732b008be947c73908" => :big_sur
+  end
+
   depends_on "icu4c"
 
    # Fix build on Xcode 11.4
