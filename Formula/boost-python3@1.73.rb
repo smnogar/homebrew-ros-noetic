@@ -6,16 +6,15 @@ class BoostPython3AT173 < Formula
   sha256 "4eb3b8d442b426dc35346235c8733b5ae35ba431690e38c6a8263dce9fcbb402"
   license "BSL-1.0"
   head "https://github.com/boostorg/boost.git"
-
-  # bottle do
-  #   cellar :any
-  #   sha256 "36a3b2ffacb47649b51e0b3031b8f67bf7dcd87e61dfd6d594610cb3e21a1acc" => :catalina
-  #   sha256 "deda39650cec775da3e8a4915aec600cfd55b367f212be975bdcc70952f2e805" => :mojave
-  #   sha256 "237b8dcaaa8fcdc72ef8a57e6e38675a82579b736f819707f28bbf5f644ceffa" => :high_sierra
-  # end
+  
+  bottle do
+    root_url "https://dl.bintray.com/snogar/bottles-ros-noetic"
+    cellar :any
+    sha256 "1742a3eacd590918586ffd76049fceb6d9a8ecc822b2b6935cb12d997c6ec7a5" => :big_sur
+  end
 
   depends_on "numpy" => :build
-  depends_on "boost@1.73.0"
+  depends_on "boost@1.73"
   depends_on "python@3.8"
 
   # Fix build on Xcode 11.4
