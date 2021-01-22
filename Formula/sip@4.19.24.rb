@@ -1,17 +1,16 @@
-class SipAT4198 < Formula
+class SipAT41924 < Formula
   desc "Tool to create Python bindings for C and C++ libraries"
   homepage "https://www.riverbankcomputing.com/software/sip/intro"
-  url "https://dl.bintray.com/homebrew/mirror/sip-4.19.8.tar.gz"
-  mirror "https://downloads.sourceforge.net/project/pyqt/sip/sip-4.19.8/sip-4.19.8.tar.gz"
-  sha256 "7eaf7a2ea7d4d38a56dd6d2506574464bddf7cf284c960801679942377c297bc"
-  revision 14
-  head "https://www.riverbankcomputing.com/hg/sip", :using => :hg
+  url "https://www.riverbankcomputing.com/static/Downloads/sip/4.19.24/sip-4.19.24.tar.gz"
+  sha256 "edcd3790bb01938191eef0f6117de0bf56d1136626c0ddb678f3a558d62e41e5"
+  head "https://www.riverbankcomputing.com/hg/sip", using: :hg
 
-  depends_on "python@2"
-  depends_on "python"
+  keg_only :versioned_formula
+
+  depends_on "python@3.8"
 
   def install
-    ENV.prepend_path "PATH", Formula["python"].opt_libexec/"bin"
+    ENV.prepend_path "PATH", Formula["python@3.8"].opt_bin
     ENV.delete("SDKROOT") # Avoid picking up /Application/Xcode.app paths
 
     if build.head?
@@ -28,19 +27,14 @@ class SipAT4198 < Formula
                       "--destdir=#{lib}/python#{version}/site-packages",
                       "--bindir=#{bin}",
                       "--incdir=#{include}",
-                      "--sipdir=#{HOMEBREW_PREFIX}/share/sip"
+                      "--sipdir=#{HOMEBREW_PREFIX}/share/sip",
+                      "--sip-module", "PyQt5.sip"
     system "make"
     system "make", "install"
-    system "make", "clean"
   end
 
   def post_install
     (HOMEBREW_PREFIX/"share/sip").mkpath
-  end
-
-  def caveats; <<~EOS
-    The sip-dir for Python is #{HOMEBREW_PREFIX}/share/sip.
-  EOS
   end
 
   test do
@@ -72,26 +66,9 @@ class SipAT4198 < Formula
         void test();
       };
     EOS
-    (testpath/"generate.py").write <<~EOS
-      from sipconfig import SIPModuleMakefile, Configuration
-      m = SIPModuleMakefile(Configuration(), "test.build")
-      m.extra_libs = ["test"]
-      m.extra_lib_dirs = ["."]
-      m.generate()
-    EOS
-    (testpath/"run.py").write <<~EOS
-      from test import Test
-      t = Test()
-      t.test()
-    EOS
+
     system ENV.cxx, "-shared", "-Wl,-install_name,#{testpath}/libtest.dylib",
                     "-o", "libtest.dylib", "test.cpp"
     system bin/"sip", "-b", "test.build", "-c", ".", "test.sip"
-
-    version = Language::Python.major_minor_version "python3"
-    ENV["PYTHONPATH"] = lib/"python#{version}/site-packages"
-    system "python3", "generate.py"
-    system "make", "-j1", "clean", "all"
-    system "python3", "run.py"
   end
 end

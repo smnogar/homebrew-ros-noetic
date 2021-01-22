@@ -1,19 +1,26 @@
-class BoostAT1710 < Formula
+class BoostAT173 < Formula
   desc "Collection of portable C++ source libraries"
   homepage "https://www.boost.org/"
-  url "https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.bz2"
-  sha256 "d73a8da01e8bf8c7eda40b4c84915071a8c8a0df4a6734537ddde4a8580524ee"
+  url "https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2"
+  mirror "https://dl.bintray.com/homebrew/mirror/boost_1_73_0.tar.bz2"
+  sha256 "4eb3b8d442b426dc35346235c8733b5ae35ba431690e38c6a8263dce9fcbb402"
+  license "BSL-1.0"
   head "https://github.com/boostorg/boost.git"
 
   bottle do
     root_url "https://dl.bintray.com/snogar/bottles-ros-noetic"
     cellar :any
-    sha256 "34702888562ef3341822d466752fc15b75f55c4be1050f732b008be947c73908" => :big_sur
+    sha256 "25735534a9b0e980d47f55bbb14163327cfc8e919c057dcf93812c5742d34a54" => :big_sur
   end
+
+  keg_only :versioned_formula
 
   depends_on "icu4c"
 
-   # Fix build on Xcode 11.4
+  uses_from_macos "bzip2"
+  uses_from_macos "zlib"
+
+  # Fix build on Xcode 11.4
   patch do
     url "https://github.com/boostorg/build/commit/b3a59d265929a213f02a451bb63cea75d668a4d9.patch?full_index=1"
     sha256 "04a4df38ed9c5a4346fbb50ae4ccc948a1440328beac03cb3586c8e2e241be08"
@@ -61,9 +68,7 @@ class BoostAT1710 < Formula
     # Boost is using "clang++ -x c" to select C compiler which breaks C++14
     # handling using ENV.cxx14. Using "cxxflags" and "linkflags" still works.
     args << "cxxflags=-std=c++14"
-    if ENV.compiler == :clang
-      args << "cxxflags=-stdlib=libc++" << "linkflags=-stdlib=libc++"
-    end
+    args << "cxxflags=-stdlib=libc++" << "linkflags=-stdlib=libc++" if ENV.compiler == :clang
 
     system "./bootstrap.sh", *bootstrap_args
     system "./b2", "headers"
