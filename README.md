@@ -24,5 +24,4 @@ Helpful repo for building ROS Noetic
    * Make sure to remove `--` if in file name. I.e. change `boost@1.73--1.73.0.big_sur.bottle.tar.gz` to `boost@1.73-1.73.0.big_sur.bottle.tar.gz`
    * Make sure to hit the publish button after uploading
 
-5. 
 
