@@ -5,16 +5,10 @@ class PyqtAT5150 < Formula
   sha256 "c6f75488ffd5365a65893bc64ea82a6957db126fbfe33654bcd43ae1c30c52f9"
   license "GPL-3.0"
 
-  bottle do
-    root_url "https://dl.bintray.com/snogar/bottles-ros-noetic"
-    cellar :any
-    sha256 "3fcb3b332de9dc4e8e9cd121a564bbbbd36541f5a73352c76ff556b6b20d3713" => :big_sur
-  end
-
   keg_only :versioned_formula
 
   depends_on "python@3.8"
-  depends_on "qt"
+  depends_on "qt@5"
   depends_on "sip@4.19.24"
 
   def install
@@ -26,7 +20,7 @@ class PyqtAT5150 < Formula
             "--sipdir=#{share}/sip/Qt5",
             # sip.h could not be found automatically
             "--sip-incdir=#{Formula["sip"].opt_include}",
-            "--qmake=#{Formula["qt"].bin}/qmake",
+            "--qmake=#{Formula["qt@5"].bin}/qmake",
             # Force deployment target to avoid libc++ issues
             "QMAKE_MACOSX_DEPLOYMENT_TARGET=#{MacOS.version}",
             "--designer-plugindir=#{pkgshare}/plugins",
