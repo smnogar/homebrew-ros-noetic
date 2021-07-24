@@ -7,12 +7,6 @@ class BoostAT173 < Formula
   license "BSL-1.0"
   head "https://github.com/boostorg/boost.git"
 
-  bottle do
-    root_url "https://dl.bintray.com/snogar/bottles-ros-noetic"
-    cellar :any
-    sha256 "25735534a9b0e980d47f55bbb14163327cfc8e919c057dcf93812c5742d34a54" => :big_sur
-  end
-
   keg_only :versioned_formula
 
   depends_on "icu4c"

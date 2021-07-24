@@ -7,12 +7,6 @@ class BoostPython3AT173 < Formula
   license "BSL-1.0"
   head "https://github.com/boostorg/boost.git"
 
-  bottle do
-    root_url "https://dl.bintray.com/snogar/bottles-ros-noetic"
-    cellar :any
-    sha256 "1742a3eacd590918586ffd76049fceb6d9a8ecc822b2b6935cb12d997c6ec7a5" => :big_sur
-  end
-
   keg_only :versioned_formula
 
   depends_on "numpy" => :build

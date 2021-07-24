@@ -5,11 +5,6 @@ class OpencvAT45 < Formula
   sha256 "e27fe5b168918ab60d58d7ace2bd82dd14a4d0bd1d3ae182952c2113f5637513"
   license "Apache-2.0"
   
-  bottle do
-    root_url "https://dl.bintray.com/snogar/bottles-ros-noetic"
-    sha256 "09b6d05586e0d82906b446f3d359bc3645b885f8dc05e3184ec20dc97e5127f2" => :big_sur
-  end
-
   keg_only :versioned_formula
 
   depends_on "cmake" => :build
