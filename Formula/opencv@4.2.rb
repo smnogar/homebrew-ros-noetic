@@ -5,10 +5,6 @@ class OpencvAT42 < Formula
   sha256 "9ccb2192d7e8c03c58fee07051364d94ed7599363f3b0dce1c5e6cc11c1bb0ec"
   revision 3
 
-  bottle do
-    root_url "https://dl.bintray.com/snogar/bottles-ros-noetic"
-    sha256 "80b391c0c1bf6d27c2a7df4d747ec5fc145a1115ed72525217ccbb88dc2ae1b4" => :big_sur
-  end
   
   keg_only :versioned_formula
 
